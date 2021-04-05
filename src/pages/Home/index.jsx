@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import Modal from '../../components/Modal';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { back, next } from '../../redux/actions/ShopAction';
@@ -17,6 +17,10 @@ const Home = () => {
   const [language, useLanguage ] = useState('English');
   const [showWord, useShowWord ] = useState(0);
 
+  useEffect(() => {
+    document.getElementById('clean').focus();
+  });
+
   const backAction = (e) => {
     if (count > 0) {
       if (count === 1) {
@@ -28,28 +32,32 @@ const Home = () => {
   }
 
   const nextAction = (e) => {
-    if (count < 50) {
-      let word = verbRegular.filter(val => val.id === count).map(regular => language === 'English' ? regular.spanish : regular.english);
-      document.getElementById('clean').value = "";
-      useValue('');
-      if (typeof(word[0]) === 'object') {
-        const wordValue = word[0].filter(val => val.name === value.toUpperCase()); 
-        if(wordValue.length > 0) {
-          useCount(count + e);
-          useShowImgUser(0);
-          word = [];
+    if (value !== '') {
+      if (count < 50) {
+        let word = verbRegular.filter(val => val.id === count).map(regular => language === 'English' ? regular.spanish : regular.english);
+        document.getElementById('clean').value = "";
+        useValue('');
+        if (typeof(word[0]) === 'object') {
+          const wordValue = word[0].filter(val => val.name === value.toUpperCase()); 
+          if(wordValue.length > 0) {
+            useCount(count + e);
+            useShowImgUser(0);
+            word = [];
+          } else {
+            alert('Por favor verifique la palabra');
+          }
         } else {
-          alert('Por favor verifique la palabra');
-        }
-      } else {
-        if(word[0] === value.toUpperCase()) {
-          useCount(count + e);
-          useShowImgUser(0);
-          word = [];
-        } else {
-          alert('Por favor verifique la palabra');
+          if(word[0] === value.toUpperCase()) {
+            useCount(count + e);
+            useShowImgUser(0);
+            word = [];
+          } else {
+            alert('Por favor verifique la palabra');
+          }
         }
       }
+    } else {
+      alert('Por favor verifique la palabra');
     }
   }
 
@@ -78,6 +86,13 @@ const Home = () => {
       useShowWord(0);
     } else {
       useShowWord(1);
+    }
+  }
+
+  const onKeyUp = (e) => {
+    const keycode = e.keyCode;
+    if(keycode === 13){
+      nextAction(1);
     }
   }
 
@@ -127,7 +142,7 @@ const Home = () => {
         <Validate>
           <div>
             <div>
-              <input type="text" name='word' onChange={(e) => validate(e)} id='clean' />
+              <input type="text" name='word' onKeyUp={(e) => onKeyUp(e)} onChange={(e) => validate(e)} id='clean' placeholder="Enter the word" />
             </div>
           </div>
           <div>
