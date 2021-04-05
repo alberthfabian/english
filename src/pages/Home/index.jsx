@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 // import Modal from '../../components/Modal';
 // import { useDispatch, useSelector } from 'react-redux';
 // import { back, next } from '../../redux/actions/ShopAction';
-import { Div, Card, Back, Next, Validate, Img, Show, Language, LanguageDiv, Word } from './style';
+import { Div, Card, Back, Next, Validate, Img, Show, Language, LanguageDiv, Word, Title } from './style';
 import { verbRegular } from '../../Data/verbRegular';
 
 const Home = () => {
@@ -28,28 +28,26 @@ const Home = () => {
   }
 
   const nextAction = (e) => {
-    if (language === 'English') {
-      if (count < 50) {
-        const word = verbRegular.filter(val => val.spanish === value.toUpperCase());
-        document.getElementById('clean').value = "";
-        useValue('');
-        if(word.length > 0) {
+    if (count < 50) {
+      let word = verbRegular.filter(val => val.id === count).map(regular => language === 'English' ? regular.spanish : regular.english);
+      document.getElementById('clean').value = "";
+      useValue('');
+      if (typeof(word[0]) === 'object') {
+        const wordValue = word[0].filter(val => val.name === value.toUpperCase()); 
+        if(wordValue.length > 0) {
           useCount(count + e);
           useShowImgUser(0);
+          word = [];
         } else {
           alert('Por favor verifique la palabra');
         }
-      }
-    } else {
-      if (count < 50) {
-        const word = verbRegular.filter(val => val.english === value.toUpperCase());
-        document.getElementById('clean').value = "";
-        useValue('');
-        if(word.length > 0) {
+      } else {
+        if(word[0] === value.toUpperCase()) {
           useCount(count + e);
           useShowImgUser(0);
+          word = [];
         } else {
-          alert('Please check the word');
+          alert('Por favor verifique la palabra');
         }
       }
     }
@@ -88,7 +86,7 @@ const Home = () => {
       <div>
         <LanguageDiv>
           <Language onClick={() => change()}>
-            Language
+            {language === 'English' ? `Write in ${language}` : `Write in ${language}` }
           </Language>
         </LanguageDiv>
         <Card>
@@ -96,7 +94,11 @@ const Home = () => {
             <Img key={value.id}>
               {value.id === count && 
                 <>
-                  <h2>{value.english}</h2>
+                  {typeof(value.english) === 'object' ? value.english.map(name => (
+                    <Title key={name.id}>
+                      {name.name}
+                    </Title>
+                  )) : <Title>{value.english}</Title> }
                   {showImgUser === 1 && (
                     <img src={value.img} alt={value.english} />
                   )}
@@ -108,7 +110,11 @@ const Home = () => {
               <Img key={value.id}>
                 {value.id === count && 
                   <>
-                    <h2>{value.spanish}</h2>
+                    {typeof(value.spanish) === 'object' ? value.spanish.map(name => (
+                      <Title key={name.id}>
+                        {name.name}
+                      </Title>
+                    )) : <Title>{value.spanish}</Title> }
                     {showImgUser === 1 && (
                       <img src={value.img} alt={value.english} />
                     )}
@@ -132,9 +138,24 @@ const Home = () => {
           <div>
             <div>{showWord === 1 && (
               verbRegular.filter(regular => regular.id === count).map(value => (
-                <p key={value.id}>
-                  {language === 'English' ? value.spanish : value.english}
-                </p>
+                <div key={value.id}>
+                  {language === 'English' ? 
+                    <>
+                      {typeof(value.spanish) === 'object' ? value.spanish.map((name) => (
+                        <p key={name.id}>
+                          {name.name}
+                        </p>
+                      )) : <p>{value.spanish}</p> }
+                    </> : 
+                    <>
+                      {typeof(value.english) === 'object' ? value.english.map((name) => (
+                        <p key={name.id}>
+                          {name.name}
+                        </p>
+                      )) : <p>{value.english}</p> }
+                    </>
+                  }
+                </div>
               )))
             }</div>
           </div>

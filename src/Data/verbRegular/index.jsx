@@ -1,32 +1,94 @@
 export const verbRegular = [
   {
     'id': 1,
-    'english': 'ABSORB',
-    'spanish': 'ABSORBER',
+    'english': [
+      {
+        'id': 1,
+        'name': 'ABSORB'
+      }
+    ],
+    'spanish': [
+      {
+        'id': 1,
+        'name': 'ABSORBER',
+      }
+    ],
     'img': 'https://live.staticflickr.com/65535/51092484909_18d9065a32_m.jpg'
   },
   {
     'id': 2,
-    'english': 'ADD',
-    'spanish': 'AÑADIR',
+    'english': [
+      {
+        'id': 1,
+        'name': 'ADD'
+      }
+    ],
+    'spanish': [
+      {
+        'id': 1,
+        'name': 'AÑADIR'
+      }
+    ],
     'img': 'https://live.staticflickr.com/65535/51092497477_006e127dae.jpg'
   },
   {
     'id': 3,
-    'english': 'ADVANCE',
-    'spanish': 'AVANZAR',
+    'english': [
+      {
+        'id': 1,
+        'name': 'ADVANCE'
+      }
+    ],
+    'spanish': [
+      {
+        'id': 1,
+        'name': 'AVANZAR'
+      }
+    ],
     'img': 'https://live.staticflickr.com/65535/51092497472_42cbb12b95.jpg' 
   },
   {
     'id': 4,
-    'english': 'AGREE',
-    'spanish': 'ACORDAR',
+    'english': [
+      {
+        'id': 1,
+        'name': 'AGREE'
+      }
+    ],
+    'spanish': [
+      {
+        'id': 1,
+        'name': 'ACORDAR'
+      },
+      {
+        'id': 2,
+        'name': 'ESTAR DE ACUERDO'
+      },
+      {
+        'id': 3,
+        'name': 'ACCEDER'
+      }
+    ],
     'img': 'https://live.staticflickr.com/65535/51092950163_52c9e7475b.jpg'
   },
   {
     'id': 5,
-    'english': 'ANSWER',
-    'spanish': 'RESPONDER',
+    'english': [
+      {
+        'id': 1,
+        'name': 'ANSWER'
+      }
+    ],
+    'spanish': [
+      {
+        'id': 1,
+        'name': 'CONSTESTAR'
+      },
+      {
+        'id': 2,
+        'name': 'RESPONDER'
+      }
+    ],
     'img': 'https://live.staticflickr.com/65535/51092406786_b9dba3c47d.jpg'
   },
   {

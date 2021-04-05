@@ -41,14 +41,16 @@ export const Img = styled.div `
   text-align: center;
   img {
     width: 150px;
+    margin-top: 10px;
   }
 `
 
 export const Button = styled.button ` 
   background-color: ${PRIMARY};
+  color: ${SECONDARY};
   :hover {
     background-color: #1567b4;
-    color: ${SECONDARY};
+    color: #FFFFFF;
   }
   cursor: pointer;
 `
@@ -89,4 +91,9 @@ export const LanguageDiv = styled.div `
 
 export const Word = styled(Button) ` 
 
+`
+
+export const Title = styled.h2 ` 
+  margin-top: 5px;
+  margin-bottom: 5px;
 `
